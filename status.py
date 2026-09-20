@@ -61,7 +61,11 @@ def build_status_markdown(
 
     lines.append("## 水位グラフ（実測・予想）")
     lines.append("")
-    lines.append(f"![境川橋の水位グラフ（実測・予想）]({chart_relpath})")
+    # chart.svgはファイル名が常に同じため、GitHub側のCDN(raw.githubusercontent.com,
+    # max-age=300)やブラウザに古い画像がキャッシュされ続けることがある。
+    # 更新時刻をクエリパラメータに付け、実行のたびに別URL扱いさせて回避する。
+    chart_url = f"{chart_relpath}?v={now:%Y%m%d%H%M%S}"
+    lines.append(f"![境川橋の水位グラフ（実測・予想）]({chart_url})")
     lines.append("")
     lines.append(
         "実線=実測水位、破線+帯=予想（不確実性幅）、水平線=警戒水位。"
