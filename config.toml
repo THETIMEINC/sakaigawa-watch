@@ -1,0 +1,49 @@
+# 境川橋観測所（神奈川県水防情報）
+[station]
+name = "境川橋"
+url = "https://www.pref.kanagawa.jp/sys/suibou/web_general/suibou_joho/html/stage/10/p10202_13_3585_4_309.html"
+
+[thresholds]
+# 神奈川県公式基準（2026-09時点、実データで確認済み）
+suiboudan_taiki = 4.00   # 水防団待機水位
+hanran_chuui = 4.50      # 氾濫注意水位
+hinan_handan = 5.20      # 避難判断水位
+hanran_kiken = 5.65      # 氾濫危険水位
+
+[forecast]
+# ETA接近の警戒しきい値（分）
+eta_warn_minutes_chuui = 180
+eta_warn_minutes_handan = 120
+eta_warn_minutes_kiken = 90
+# トレンド外挿に使う直近データの範囲（分）
+trend_window_minutes = 60
+trend_window_minutes_min = 30
+# 異常値除去
+max_jump_per_10min = 0.5
+min_valid_points = 5
+# 急上昇判定
+surge_30min = 0.3
+surge_10min = 0.15
+# 再通知の抑制
+hysteresis_margin = 0.2
+cooldown_minutes = 60
+
+[rain]
+# Open-Meteo（藤沢市周辺）
+latitude = 35.34
+longitude = 139.47
+
+[notify]
+disclaimer = "本通知は補助情報です。避難の判断は自治体の公式情報・避難情報に従ってください。"
+kanagawa_page = "https://www.pref.kanagawa.jp/sys/suibou/web_general/suibou_joho/html/stage/10/p10202_13_3585_4_309.html"
+camera_page = "https://mizubousai.city.yokohama.lg.jp/river_camera/rc_details_now.html?lang=ja&wpc=546694"
+
+[failure]
+consecutive_failures_to_notify = 2
+
+[schedule]
+# 平常時の実行間隔（分）。県ページは常に直近約4時間分を返すため、
+# この間隔で間引いてもデータ欠落は起きない（次回アクセス時にまとめて取得される）。
+normal_interval_minutes = 30
+# 水防団待機水位からこの値を引いた水位を超えたら、間引きをやめて毎回（10分おき）実行する
+escalate_margin = 0.5
