@@ -1,6 +1,6 @@
 # sakaigawa-watch
 
-神奈川県藤沢市を流れる境川（境川橋観測所）の水位を10分おきに取得し、氾濫の危険が近づいた場合に Slack で通知するプロジェクトです。現在の状況は実行のたびに `generated/STATUS.md` にローカル生成されます（リポジトリにはpushしません。`python3 main.py`実行後にご確認ください）。
+神奈川県藤沢市を流れる境川（境川橋観測所）の水位を10分おきに取得し、氾濫の危険が近づいた場合に Slack で通知するプロジェクトです。現在の状況は [generated/STATUS.md](generated/STATUS.md) にGitHub Actionsが自動更新します。
 
 ## ⚠️ 免責事項
 
@@ -11,7 +11,7 @@
 - [神奈川県雨量水位情報](https://www.pref.kanagawa.jp/sys/suibou/web_general/suibou_joho/html/stage/10/p10202_13_3585_4_309.html)（境川橋観測所）から10分値の水位を取得
 - 直近の水位トレンドに、今後の降雨予報（[Open-Meteo](https://open-meteo.com/)）の強弱を反映した**降雨連動ヒューリスティック**で、各警戒水位への到達予測時刻（ETA）と予想パスを算出（後述）
 - 警戒水位を超えた・超えそう・急上昇している場合に Slack へ通知
-- `generated/STATUS.md` に現在水位・予測グラフ・（3.5m以上のときは）河川カメラ映像・直近観測値を1ページにまとめて自動更新（ローカル生成のみ、pushはしない）
+- [generated/STATUS.md](generated/STATUS.md) に現在水位・予測グラフ・（3.5m以上のときは）河川カメラ映像・直近観測値を1ページにまとめて自動更新
 - 取得した水位・降雨は `generated/data/levels/YYYY-MM.csv`・`generated/data/rain/YYYY-MM.csv`（月別）に蓄積し、将来のモデル改良に使う
 - **平常時は間引き**: GitHub Actionsのcron自体は10分おきに起動するが、水位が水防団待機水位より0.5m以上低い平常時は30分に1回だけ実際のアクセス・判定・commitを行う（それ以外の起動はほぼ即終了）。県ページは常に直近約4時間分のデータを返すため、間引いてもデータの解像度は失われない。水位が上がって閾値に近づくと自動的に毎回（10分おき）の本実行に切り替わる
 
@@ -73,7 +73,7 @@ notify.py     # Slack送信・メッセージ整形
 config.toml   # 観測所URL・しきい値・クールダウン・降雨モデルのパラメータ等
 
 generated/    # 自動生成物（ソースコードと分離）
-  STATUS.md               # 現況ページ（1ページで完結）。.gitignore対象でpushはしない
+  STATUS.md               # 現況ページ（1ページで完結）。GitHub Actionsが自動commit・push
   assets/                 # 水位グラフ(chart.svg)・河川カメラ画像(camera_*.jpg、常に最大1枚)
   data/levels/YYYY-MM.csv # 蓄積された水位データ（月別、削除しない）
   data/rain/YYYY-MM.csv   # 蓄積された実測降雨データ（月別、削除しない）
