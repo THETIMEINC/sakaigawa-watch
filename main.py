@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 from chart import build_svg_chart
-from fetch import FetchError, Reading, fetch_camera_snapshot, fetch_rain, fetch_station, load_config
+from fetch import FetchError, Reading, fetch_camera_snapshot, fetch_rain, fetch_station, load_config, now_jst
 from forecast import RainContext, clean_readings, judge, latest_valid_reading, should_run_full_check
 from notify import build_failure_message, build_message, send_slack
 from status import build_status_markdown
@@ -131,7 +131,7 @@ def get_latest_known_value() -> float | None:
 
     当月ファイルが空（月初でまだ本実行がない等）の場合は前月ファイルも見る。
     """
-    now = datetime.now()
+    now = now_jst()
     for dt in (now, (now.replace(day=1) - timedelta(days=1))):
         existing = _read_month_csv(month_path(LEVELS_DIR, dt), "observed_at")
         if existing:
@@ -247,7 +247,7 @@ def run(dry_run: bool, force: bool = False) -> int:
 
     cfg = load_config(str(CONFIG_PATH))
     state = load_state()
-    now = datetime.now()
+    now = now_jst()
 
     if not force:
         last_value = get_latest_known_value()

@@ -5,6 +5,7 @@ from pathlib import Path
 from fetch import FetchError, parse_station_html
 
 FIXTURE = Path(__file__).parent / "fixtures" / "station_309.html"
+FIXTURE_EXCEEDED = Path(__file__).parent / "fixtures" / "station_309_exceeded.html"
 
 
 class TestParseStationHtml(unittest.TestCase):
@@ -44,6 +45,24 @@ class TestParseStationHtml(unittest.TestCase):
     def test_broken_html_raises(self):
         with self.assertRaises(FetchError):
             parse_station_html("<html><body>no table here</body></html>")
+
+
+class TestParseStationHtmlWhenExceeded(unittest.TestCase):
+    """水位が警戒水位を超えると<td>に class="stageLv1" 等が付与され、
+    それ以降の行が解析から落ちる回帰バグの再発防止。"""
+
+    def setUp(self):
+        self.html = FIXTURE_EXCEEDED.read_text(encoding="utf-8")
+
+    def test_all_24_rows_parsed_even_after_threshold_class_appears(self):
+        snap = parse_station_html(self.html)
+        self.assertEqual(len(snap.readings), 24)
+
+    def test_last_reading_after_exceeding_threshold(self):
+        snap = parse_station_html(self.html)
+        last = snap.readings[-1]
+        self.assertEqual(last.observed_at, datetime(2026, 9, 21, 0, 0))
+        self.assertEqual(last.value, 4.20)
 
 
 if __name__ == "__main__":

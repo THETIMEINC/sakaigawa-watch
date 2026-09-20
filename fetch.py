@@ -5,10 +5,22 @@ import json
 import re
 import urllib.request
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.error import URLError
 
 USER_AGENT = "sakaigawa-watch/1.0 (+https://github.com/THETIMEINC/sakaigawa-watch)"
+
+JST = timezone(timedelta(hours=9))
+
+
+def now_jst() -> datetime:
+    """壁時計の現在時刻をJST基準で返す（tzinfoなし）。
+
+    GitHub Actionsのランナーはシステム時刻がUTCのため、datetime.now()を
+    そのまま使うと県ページ・Open-Meteo（ともにJSTのタイムスタンプ）との間で
+    9時間のズレが生じ、配信遅延検知やグラフの「現在」位置が壊れる。
+    """
+    return datetime.now(JST).replace(tzinfo=None)
 
 
 class FetchError(Exception):
@@ -42,9 +54,11 @@ _GEN_AT_RE = re.compile(r"<!--\s*(\d{4})-(\d{2})-(\d{2})-(\d{2})-(\d{2})\s*-->")
 
 # 水位表の各行: 日付付き "09/20 18:30" または時刻のみ "18:40"、
 # 直後の <span data-graph-dtkey="stage_item_data_N">値</span>
+# 水位が警戒水位を超えると2つ目の<td>に class="stageLv1"等が付与されるため、
+# 属性なし<td>限定ではなく<td ...>を許容する（超過時に限って解析が止まるバグの修正）。
 _ROW_RE = re.compile(
     r'<td class="notranslate">\s*(?:(\d{2})/(\d{2})\s+)?(\d{2}):(\d{2})\s*</td>'
-    r'\s*<td>\s*<span[^>]*data-graph-dtkey="stage_item_data_\d+"[^>]*>'
+    r'\s*<td[^>]*>\s*<span[^>]*data-graph-dtkey="stage_item_data_\d+"[^>]*>'
     r'([0-9]+\.[0-9]+)</span>',
     re.DOTALL,
 )
@@ -83,7 +97,7 @@ def parse_station_html(html: str, now_hint: datetime | None = None) -> StationSn
     for mm, dd, hh, minute, value in rows:
         h, mi = int(hh), int(minute)
         if mm and dd:
-            date = datetime(anchor_date.year if anchor_date else datetime.now().year, int(mm), int(dd)).date()
+            date = datetime(anchor_date.year if anchor_date else now_jst().year, int(mm), int(dd)).date()
         elif last_date is not None:
             date = last_date
             # 日付表記のない行で時刻が巻き戻った場合は日跨ぎとみなす
@@ -106,7 +120,7 @@ def parse_station_html(html: str, now_hint: datetime | None = None) -> StationSn
 
 def fetch_station(url: str) -> StationSnapshot:
     html = _http_get(url)
-    return parse_station_html(html, now_hint=datetime.now())
+    return parse_station_html(html, now_hint=now_jst())
 
 
 @dataclass(frozen=True)
