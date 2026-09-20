@@ -79,10 +79,7 @@ def build_status_markdown(
         captured_str = f"{camera_captured_at:%Y-%m-%d %H:%M:%S}" if camera_captured_at else "不明"
         lines.append("## 河川カメラ映像")
         lines.append("")
-        lines.append(
-            f"水位が {cfg['camera']['embed_threshold']:.1f}m 以上のため、最新映像を掲載しています"
-            f"（撮影時刻: {captured_str}）。"
-        )
+        lines.append(f"水位が上昇傾向のため、最新映像を掲載しています（撮影時刻: {captured_str}）。")
         lines.append("")
         lines.append(f"![境川橋付近の河川カメラ映像]({camera_relpath})")
         lines.append("")
