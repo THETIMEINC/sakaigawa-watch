@@ -63,5 +63,5 @@ camera_id = "546694"
 embed_threshold = 3.5
 
 [chart]
-window_hours = 24
+window_hours = 12
 forecast_hours = 3
