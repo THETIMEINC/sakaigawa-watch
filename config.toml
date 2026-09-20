@@ -21,12 +21,20 @@ trend_window_minutes_min = 30
 # 異常値除去
 max_jump_per_10min = 0.5
 min_valid_points = 5
+# 最新観測が壁時計からこれ以上遅れていたら予測を評価しない（配信停止時の誤予測防止）
+stale_after_minutes = 90
 # 急上昇判定
 surge_30min = 0.3
 surge_10min = 0.15
 # 再通知の抑制
 hysteresis_margin = 0.2
 cooldown_minutes = 60
+# 降雨連動の予測（ヒューリスティック。検証済みの水文モデルではない）
+# 直近trend_window_minutes分の実測降雨がこの値(mm)未満なら、現在の上昇は
+# 降雨由来と言えない（上流放流・感潮等の可能性）として単純線形にフォールバックする
+rain_floor_mm = 1.0
+# 将来降雨/直近降雨の比率の上限。これを超える比率は頭打ちにする
+rain_ratio_max = 3.0
 
 [rain]
 # Open-Meteo（藤沢市周辺）
@@ -47,3 +55,13 @@ consecutive_failures_to_notify = 2
 normal_interval_minutes = 30
 # 水防団待機水位からこの値を引いた水位を超えたら、間引きをやめて毎回（10分おき）実行する
 escalate_margin = 0.5
+
+[camera]
+# 横浜市河川監視カメラ（境川橋付近）
+camera_id = "546694"
+# この水位(m)以上でSTATUS.mdに画像を埋め込む
+embed_threshold = 3.5
+
+[chart]
+window_hours = 24
+forecast_hours = 3

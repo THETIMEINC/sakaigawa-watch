@@ -110,17 +110,34 @@ def fetch_station(url: str) -> StationSnapshot:
 
 
 @dataclass(frozen=True)
-class RainForecastPoint:
+class RainPoint:
     time: datetime
     precipitation_mm: float
 
 
-def fetch_rain_forecast(latitude: float, longitude: float, timeout: int = 15) -> list[RainForecastPoint] | None:
-    """今後3時間の15分刻み降水量予測。失敗時は None（通知は継続する）。"""
+@dataclass(frozen=True)
+class RainSeries:
+    points: list[RainPoint]
+
+
+def fetch_rain(
+    latitude: float,
+    longitude: float,
+    past_days: int = 1,
+    forecast_days: int = 2,
+    timeout: int = 15,
+) -> RainSeries | None:
+    """過去(past_days)〜未来(forecast_days)の15分刻み降水量を1回のAPI呼び出しで取得する。
+
+    同一エンドポイント・同一粒度で実測相当（レーダー+アメダスのブレンド推定値）と
+    予報を返すため、呼び出し側は返ってきた時系列を「今」で分割して使う。
+    失敗時は None（通知・記録は継続する）。
+    """
     url = (
         "https://api.open-meteo.com/v1/forecast"
         f"?latitude={latitude}&longitude={longitude}"
-        "&minutely_15=precipitation&forecast_days=1&timezone=Asia%2FTokyo&models=jma_seamless"
+        f"&minutely_15=precipitation&past_days={past_days}&forecast_days={forecast_days}"
+        "&timezone=Asia%2FTokyo&models=jma_seamless"
     )
     try:
         raw = _http_get(url, timeout=timeout)
@@ -130,17 +147,14 @@ def fetch_rain_forecast(latitude: float, longitude: float, timeout: int = 15) ->
     except Exception:
         return None
 
-    now = datetime.now()
-    horizon = now + timedelta(hours=3)
-    points: list[RainForecastPoint] = []
+    points: list[RainPoint] = []
     for t, v in zip(times, values):
         try:
             dt = datetime.fromisoformat(t)
         except ValueError:
             continue
-        if now <= dt <= horizon:
-            points.append(RainForecastPoint(time=dt, precipitation_mm=float(v)))
-    return points
+        points.append(RainPoint(time=dt, precipitation_mm=float(v)))
+    return RainSeries(points=points)
 
 
 def load_config(path: str) -> dict:
@@ -150,3 +164,35 @@ def load_config(path: str) -> dict:
         raise
     with open(path, "rb") as f:
         return tomllib.load(f)
+
+
+@dataclass(frozen=True)
+class CameraSnapshot:
+    captured_at: datetime
+    image_bytes: bytes
+
+
+def fetch_camera_snapshot(camera_id: str, timeout: int = 20) -> CameraSnapshot | None:
+    """横浜市河川監視カメラの最新1枚を取得する。失敗時は None（通知・記録は継続する）。
+
+    画像URLの規則: /wdata/camera/{camera_id}/{camera_id}_{YYYYMMDDHHMMSS}.jpg
+    最新の時刻は {camera_id}_latest.idx の先頭行から取得する（非公式・要維持）。
+    """
+    base = "https://mizubousai.city.yokohama.lg.jp/wdata/camera"
+    idx_url = f"{base}/{camera_id}/{camera_id}_latest.idx"
+    try:
+        idx_text = _http_get(idx_url, timeout=timeout)
+        first_line = idx_text.strip().splitlines()[0].strip()
+        captured_at = datetime.strptime(first_line, "%Y%m%d%H%M%S")
+    except Exception:
+        return None
+
+    image_url = f"{base}/{camera_id}/{camera_id}_{first_line}.jpg"
+    req = urllib.request.Request(image_url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            image_bytes = resp.read()
+    except (URLError, TimeoutError):
+        return None
+
+    return CameraSnapshot(captured_at=captured_at, image_bytes=image_bytes)
