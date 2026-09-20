@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "sakaigawa-watch bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/levels/ data/rain/ state.json STATUS.md assets/
+          git add data/levels/ data/rain/ state.json assets/
           if git diff --cached --quiet; then
             echo "変更なし"
             exit 0
