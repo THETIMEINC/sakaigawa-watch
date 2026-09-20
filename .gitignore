@@ -3,4 +3,4 @@ __pycache__/
 .venv/
 
 # main.py実行のたびにローカルで生成される現況ページ。pushはしない。
-STATUS.md
+generated/STATUS.md

@@ -17,14 +17,17 @@ from notify import build_failure_message, build_message, send_slack
 from status import build_status_markdown
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+CONFIG_PATH = BASE_DIR / "config.toml"
+
+# 自動生成物（データ蓄積・状態・現況ページ・画像）はソースコードと分離してgenerated/にまとめる
+GENERATED_DIR = BASE_DIR / "generated"
+DATA_DIR = GENERATED_DIR / "data"
 LEVELS_DIR = DATA_DIR / "levels"
 RAIN_DIR = DATA_DIR / "rain"
 LEGACY_LEVELS_PATH = DATA_DIR / "levels.csv"
-STATE_PATH = BASE_DIR / "state.json"
-CONFIG_PATH = BASE_DIR / "config.toml"
-ASSETS_DIR = BASE_DIR / "assets"
-STATUS_PATH = BASE_DIR / "STATUS.md"
+STATE_PATH = GENERATED_DIR / "state.json"
+ASSETS_DIR = GENERATED_DIR / "assets"
+STATUS_PATH = GENERATED_DIR / "STATUS.md"
 
 LEVEL_CSV_FIELDS = ["observed_at", "value", "suspect"]
 RAIN_CSV_FIELDS = ["observed_at", "precipitation_mm"]
