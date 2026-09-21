@@ -1,6 +1,20 @@
 {
   "consecutive_failures": 0,
-  "last_checked_at": "2026-09-21T10:34:12.503202",
-  "notified": {},
-  "notified_approaching": {}
+  "last_checked_at": "2026-09-21T16:03:25.466225",
+  "notified": {
+    "hanran_chuui": {
+      "at": "2026-09-21T16:03:25.466225"
+    },
+    "suiboudan_taiki": {
+      "at": "2026-09-21T16:03:25.466225"
+    }
+  },
+  "notified_approaching": {
+    "hanran_kiken": {
+      "at": "2026-09-21T16:03:25.466225"
+    },
+    "hinan_handan": {
+      "at": "2026-09-21T16:03:25.466225"
+    }
+  }
 }
