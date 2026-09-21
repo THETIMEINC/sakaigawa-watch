@@ -1,50 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="sans-serif" font-size="11">
 <rect x="0" y="0" width="760" height="380" fill="#ffffff"/>
 <rect x="55" y="20" width="615" height="320" fill="none" stroke="#ccc"/>
-<line x1="55" y1="128.4" x2="670" y2="128.4" stroke="#c9a227" stroke-dasharray="4,3" stroke-width="1"/>
-<text x="675" y="131.4" fill="#c9a227">水防団待機水位 4.00m</text>
-<line x1="55" y1="102.0" x2="670" y2="102.0" stroke="#e08a1e" stroke-dasharray="4,3" stroke-width="1"/>
-<text x="675" y="105.0" fill="#e08a1e">氾濫注意水位 4.50m</text>
-<line x1="55" y1="65.0" x2="670" y2="65.0" stroke="#d94f2b" stroke-dasharray="4,3" stroke-width="1"/>
-<text x="675" y="68.0" fill="#d94f2b">避難判断水位 5.20m</text>
-<line x1="55" y1="41.2" x2="670" y2="41.2" stroke="#c0392b" stroke-dasharray="4,3" stroke-width="1"/>
-<text x="675" y="44.2" fill="#c0392b">氾濫危険水位 5.65m</text>
+<line x1="55" y1="154.8" x2="670" y2="154.8" stroke="#c9a227" stroke-dasharray="4,3" stroke-width="1"/>
+<text x="675" y="157.8" fill="#c9a227">水防団待機水位 4.00m</text>
+<line x1="55" y1="131.7" x2="670" y2="131.7" stroke="#e08a1e" stroke-dasharray="4,3" stroke-width="1"/>
+<text x="675" y="134.7" fill="#e08a1e">氾濫注意水位 4.50m</text>
+<line x1="55" y1="99.3" x2="670" y2="99.3" stroke="#d94f2b" stroke-dasharray="4,3" stroke-width="1"/>
+<text x="675" y="102.3" fill="#d94f2b">避難判断水位 5.20m</text>
+<line x1="55" y1="78.5" x2="670" y2="78.5" stroke="#c0392b" stroke-dasharray="4,3" stroke-width="1"/>
+<text x="675" y="81.5" fill="#c0392b">氾濫危険水位 5.65m</text>
 <line x1="547.0" y1="20" x2="547.0" y2="340" stroke="#888" stroke-dasharray="2,3" stroke-width="1"/>
 <text x="550.0" y="32" fill="#888">現在</text>
 <line x1="55.0" y1="340" x2="55.0" y2="344" stroke="#666"/>
-<text x="55.0" y="356" text-anchor="middle" fill="#333">09/20 20:33</text>
+<text x="55.0" y="356" text-anchor="middle" fill="#333">09/20 22:34</text>
 <line x1="157.5" y1="340" x2="157.5" y2="344" stroke="#666"/>
-<text x="157.5" y="356" text-anchor="middle" fill="#333">09/20 23:03</text>
+<text x="157.5" y="356" text-anchor="middle" fill="#333">09/21 01:04</text>
 <line x1="260.0" y1="340" x2="260.0" y2="344" stroke="#666"/>
-<text x="260.0" y="356" text-anchor="middle" fill="#333">09/21 01:33</text>
+<text x="260.0" y="356" text-anchor="middle" fill="#333">09/21 03:34</text>
 <line x1="362.5" y1="340" x2="362.5" y2="344" stroke="#666"/>
-<text x="362.5" y="356" text-anchor="middle" fill="#333">09/21 04:03</text>
+<text x="362.5" y="356" text-anchor="middle" fill="#333">09/21 06:04</text>
 <line x1="465.0" y1="340" x2="465.0" y2="344" stroke="#666"/>
-<text x="465.0" y="356" text-anchor="middle" fill="#333">09/21 06:33</text>
+<text x="465.0" y="356" text-anchor="middle" fill="#333">09/21 08:34</text>
 <line x1="567.5" y1="340" x2="567.5" y2="344" stroke="#666"/>
-<text x="567.5" y="356" text-anchor="middle" fill="#333">09/21 09:03</text>
+<text x="567.5" y="356" text-anchor="middle" fill="#333">09/21 11:04</text>
 <line x1="670.0" y1="340" x2="670.0" y2="344" stroke="#666"/>
-<text x="670.0" y="356" text-anchor="middle" fill="#333">09/21 11:33</text>
+<text x="670.0" y="356" text-anchor="middle" fill="#333">09/21 13:34</text>
 <line x1="51" y1="340.0" x2="55" y2="340.0" stroke="#666"/>
 <text x="47" y="343.0" text-anchor="end" fill="#333">0.0</text>
 <line x1="51" y1="276.0" x2="55" y2="276.0" stroke="#666"/>
-<text x="47" y="279.0" text-anchor="end" fill="#333">1.2</text>
+<text x="47" y="279.0" text-anchor="end" fill="#333">1.4</text>
 <line x1="51" y1="212.0" x2="55" y2="212.0" stroke="#666"/>
-<text x="47" y="215.0" text-anchor="end" fill="#333">2.4</text>
+<text x="47" y="215.0" text-anchor="end" fill="#333">2.8</text>
 <line x1="51" y1="148.0" x2="55" y2="148.0" stroke="#666"/>
-<text x="47" y="151.0" text-anchor="end" fill="#333">3.6</text>
+<text x="47" y="151.0" text-anchor="end" fill="#333">4.1</text>
 <line x1="51" y1="84.0" x2="55" y2="84.0" stroke="#666"/>
-<text x="47" y="87.0" text-anchor="end" fill="#333">4.8</text>
+<text x="47" y="87.0" text-anchor="end" fill="#333">5.5</text>
 <line x1="51" y1="20.0" x2="55" y2="20.0" stroke="#666"/>
-<text x="47" y="23.0" text-anchor="end" fill="#333">6.1</text>
-<polyline points="380.7,208.3 387.5,207.2 394.4,210.4 401.2,211.5 408.0,212.5 414.9,212.5 421.7,209.9 428.5,208.3 435.4,205.7 442.2,205.7 449.0,204.1 455.9,205.1 462.7,204.6 469.5,204.1 476.4,204.1 483.2,202.5 490.0,203.0 496.9,201.4 503.7,202.0 510.5,203.0 517.4,200.9 524.2,202.5 531.0,203.0 537.9,204.1" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-<circle cx="537.9" cy="204.1" r="3.5" fill="#1a1a1a"/>
-<text x="543.9" y="198.1" fill="#1a1a1a">2.57m</text>
+<text x="47" y="23.0" text-anchor="end" fill="#333">6.9</text>
+<polygon points="537.3,200.7 547.5,200.7 557.8,186.4 568.0,172.2 578.3,158.0 588.5,143.7 598.8,129.5 609.0,115.3 619.3,101.0 629.5,86.8 639.8,72.6 650.0,58.3 660.3,44.1 660.3,29.3 650.0,44.8 639.8,60.3 629.5,75.8 619.3,91.4 609.0,106.9 598.8,122.4 588.5,137.9 578.3,153.4 568.0,169.0 557.8,184.5 547.5,200.0 537.3,200.7" fill="#2e7dd7" fill-opacity="0.12" stroke="none"/>
+<polyline points="537.3,200.7 547.5,200.7 557.8,185.8 568.0,170.9 578.3,156.0 588.5,141.1 598.8,126.3 609.0,111.4 619.3,96.5 629.5,81.6 639.8,66.8 650.0,51.9 660.3,37.0" fill="none" stroke="#2e7dd7" stroke-width="1.5" stroke-dasharray="5,3"/>
+<polyline points="380.1,221.5 387.0,221.0 393.8,221.0 400.6,219.6 407.5,220.1 414.3,218.7 421.1,219.2 428.0,220.1 434.8,218.3 441.6,219.6 448.5,220.1 455.3,221.0 462.1,222.0 469.0,220.6 475.8,218.3 482.6,218.7 489.5,215.9 496.3,217.8 503.1,218.3 510.0,214.1 516.8,210.4 523.6,206.2 530.5,201.6 537.3,200.7" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+<circle cx="537.3" cy="200.7" r="3.5" fill="#1a1a1a"/>
+<text x="543.3" y="194.7" fill="#1a1a1a">3.01m</text>
 <rect x="63" y="28" width="280" height="82" fill="#ffffff" fill-opacity="0.9" stroke="#ccc"/>
 <text x="69" y="42" fill="#333" font-weight="bold">到達予想</text>
-<text x="69" y="57" fill="#888">水防団待機水位: 見込みなし</text>
-<text x="69" y="72" fill="#888">氾濫注意水位: 見込みなし</text>
-<text x="69" y="87" fill="#888">避難判断水位: 見込みなし</text>
-<text x="69" y="102" fill="#888">氾濫危険水位: 見込みなし</text>
+<text x="69" y="57" fill="#c9a227">水防団待機水位: 09/21 11:20〜09/21 11:35頃</text>
+<text x="69" y="72" fill="#e08a1e">氾濫注意水位: 09/21 11:50頃</text>
+<text x="69" y="87" fill="#d94f2b">避難判断水位: 09/21 12:20〜09/21 12:35頃</text>
+<text x="69" y="102" fill="#c0392b">氾濫危険水位: 09/21 12:35〜09/21 12:50頃</text>
 <text x="55" y="374" fill="#666">実線: 実測水位　破線+帯: 予想（不確実性幅、降雨予報:Open-Meteo https://open-meteo.com/）　凡例の水平線: 警戒水位</text>
 </svg>
