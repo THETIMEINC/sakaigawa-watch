@@ -52,8 +52,6 @@ consecutive_failures_to_notify = 2
 [camera]
 # 横浜市河川監視カメラ（境川橋付近）
 camera_id = "546694"
-# この水位(m)以上でSTATUS.mdに画像を埋め込む
-embed_threshold = 3.5
 
 [chart]
 window_hours = 12

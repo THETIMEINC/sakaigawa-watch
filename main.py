@@ -205,14 +205,12 @@ def update_status_page(cleaned, judgement, thresholds, now, generated_at, rain, 
 
     camera_relpath = None
     camera_captured_at = None
-    threshold = cfg["camera"]["embed_threshold"]
-    if judgement.current_value is not None and judgement.current_value >= threshold:
-        snapshot = fetch_camera_snapshot(cfg["camera"]["camera_id"])
-        if snapshot is not None:
-            filename = f"camera_{snapshot.captured_at:%Y%m%d_%H%M%S}.jpg"
-            (ASSETS_DIR / filename).write_bytes(snapshot.image_bytes)
-            camera_relpath = f"assets/{filename}"
-            camera_captured_at = snapshot.captured_at
+    snapshot = fetch_camera_snapshot(cfg["camera"]["camera_id"])
+    if snapshot is not None:
+        filename = f"camera_{snapshot.captured_at:%Y%m%d_%H%M%S}.jpg"
+        (ASSETS_DIR / filename).write_bytes(snapshot.image_bytes)
+        camera_relpath = f"assets/{filename}"
+        camera_captured_at = snapshot.captured_at
 
     rain_total_mm = sum(p.precipitation_mm for p in rain) if rain else None
 

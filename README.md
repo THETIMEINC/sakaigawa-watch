@@ -11,7 +11,7 @@
 - [神奈川県雨量水位情報](https://www.pref.kanagawa.jp/sys/suibou/web_general/suibou_joho/html/stage/10/p10202_13_3585_4_309.html)（境川橋観測所）から10分値の水位を取得
 - 直近の水位トレンドに、今後の降雨予報（[Open-Meteo](https://open-meteo.com/)）の強弱を反映した**降雨連動ヒューリスティック**で、各警戒水位への到達予測時刻（ETA）と予想パスを算出（後述）
 - 警戒水位を超えた・超えそう・急上昇している場合に Slack へ通知
-- [generated/STATUS.md](generated/STATUS.md) に現在水位・予測グラフ・（3.5m以上のときは）河川カメラ映像・直近観測値を1ページにまとめて自動更新
+- [generated/STATUS.md](generated/STATUS.md) に現在水位・予測グラフ・河川カメラ映像・直近観測値を1ページにまとめて自動更新
 - 取得した水位・降雨は `generated/data/levels/YYYY-MM.csv`・`generated/data/rain/YYYY-MM.csv`（月別）に蓄積し、将来のモデル改良に使う
 
 ## 警戒水位（境川橋、公式基準）
