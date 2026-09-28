@@ -10,7 +10,6 @@ from forecast import (
     etas_from_schedule,
     fit_trend,
     judge,
-    should_run_full_check,
     valid_points,
 )
 
@@ -149,34 +148,6 @@ class TestJudge(unittest.TestCase):
         self.assertEqual(j.approaching, [])
         self.assertFalse(j.surge_10min)
         self.assertFalse(j.surge_30min)
-
-
-class TestShouldRunFullCheck(unittest.TestCase):
-    def setUp(self):
-        self.cfg = {
-            "thresholds": THRESHOLDS,
-            "schedule": {"normal_interval_minutes": 30, "escalate_margin": 0.5},
-        }
-
-    def test_first_run_always_full(self):
-        now = datetime(2026, 9, 20, 22, 0)
-        self.assertTrue(should_run_full_check(None, None, now, self.cfg))
-
-    def test_normal_level_skipped_within_interval(self):
-        now = datetime(2026, 9, 20, 22, 20)
-        last_checked = datetime(2026, 9, 20, 22, 10)  # 10分前
-        self.assertFalse(should_run_full_check(3.0, last_checked, now, self.cfg))
-
-    def test_normal_level_runs_after_interval(self):
-        now = datetime(2026, 9, 20, 22, 45)
-        last_checked = datetime(2026, 9, 20, 22, 10)  # 35分前
-        self.assertTrue(should_run_full_check(3.0, last_checked, now, self.cfg))
-
-    def test_elevated_level_always_runs(self):
-        # suiboudan_taiki(4.00) - margin(0.5) = 3.50 以上なら毎回実行
-        now = datetime(2026, 9, 20, 22, 20)
-        last_checked = datetime(2026, 9, 20, 22, 10)  # 10分前でも
-        self.assertTrue(should_run_full_check(3.60, last_checked, now, self.cfg))
 
 
 def rising_trend(now):

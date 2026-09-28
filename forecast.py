@@ -337,25 +337,3 @@ def judge(
         surge_30min=surge30,
         forecast_schedule=schedule,
     )
-
-
-def should_run_full_check(
-    last_value: float | None,
-    last_checked_at: datetime | None,
-    now: datetime,
-    cfg: dict,
-) -> bool:
-    """平常時は間引き、警戒水位に近づいたら毎回実行する。
-
-    県ページは常に直近約4時間分のデータを返すため、間引いても
-    次回アクセス時にまとめて取得でき、データの解像度は失われない。
-    """
-    if last_value is None or last_checked_at is None:
-        return True
-
-    escalate_threshold = cfg["thresholds"]["suiboudan_taiki"] - cfg["schedule"]["escalate_margin"]
-    if last_value >= escalate_threshold:
-        return True
-
-    elapsed_min = (now - last_checked_at).total_seconds() / 60.0
-    return elapsed_min >= cfg["schedule"]["normal_interval_minutes"]

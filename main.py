@@ -12,7 +12,7 @@ from pathlib import Path
 
 from chart import build_svg_chart
 from fetch import FetchError, Reading, fetch_camera_snapshot, fetch_rain, fetch_station, load_config, now_jst
-from forecast import RainContext, clean_readings, judge, latest_valid_reading, should_run_full_check
+from forecast import RainContext, clean_readings, judge, latest_valid_reading
 from notify import build_failure_message, build_message, send_slack
 from status import build_status_markdown
 
@@ -129,20 +129,6 @@ def merge_and_save_rain(points, now: datetime) -> None:
         merge_and_save_rows(RAIN_DIR, RAIN_CSV_FIELDS, "observed_at", rows)
 
 
-def get_latest_known_value() -> float | None:
-    """CSVに残っている最新の観測値（前回までの本実行で取得したもの）。
-
-    当月ファイルが空（月初でまだ本実行がない等）の場合は前月ファイルも見る。
-    """
-    now = now_jst()
-    for dt in (now, (now.replace(day=1) - timedelta(days=1))):
-        existing = _read_month_csv(month_path(LEVELS_DIR, dt), "observed_at")
-        if existing:
-            latest_key = max(existing.keys())
-            return float(existing[latest_key]["value"])
-    return None
-
-
 def levels_to_notify(judgement, thresholds: dict[str, float], state: dict, now: datetime, cfg: dict) -> list[str]:
     """ヒステリシス・クールダウンを考慮し、今回新たに通知すべき段階を返す。"""
     notified = state.setdefault("notified", {})
@@ -245,25 +231,12 @@ def update_status_page(cleaned, judgement, thresholds, now, generated_at, rain, 
     STATUS_PATH.write_text(status_md, encoding="utf-8")
 
 
-def run(dry_run: bool, force: bool = False) -> int:
+def run(dry_run: bool) -> int:
     migrate_legacy_levels_csv()
 
     cfg = load_config(str(CONFIG_PATH))
     state = load_state()
     now = now_jst()
-
-    if not force:
-        last_value = get_latest_known_value()
-        last_checked_at = (
-            datetime.fromisoformat(state["last_checked_at"]) if state.get("last_checked_at") else None
-        )
-        if not should_run_full_check(last_value, last_checked_at, now, cfg):
-            print(
-                f"平常時のため今回はスキップ（前回本実行: {last_checked_at}, 直近水位: {last_value}）"
-            )
-            return 0
-
-    state["last_checked_at"] = now.isoformat()
 
     try:
         snapshot = fetch_station(cfg["station"]["url"])
@@ -342,9 +315,8 @@ def run(dry_run: bool, force: bool = False) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="境川橋の水位監視")
     parser.add_argument("--dry-run", action="store_true", help="Slackへ送信せず標準出力のみ")
-    parser.add_argument("--force", action="store_true", help="平常時の間引きを無視して必ず本実行する")
     args = parser.parse_args()
-    return run(dry_run=args.dry_run, force=args.force)
+    return run(dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
