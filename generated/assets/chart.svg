@@ -12,19 +12,19 @@
 <line x1="547.0" y1="20" x2="547.0" y2="340" stroke="#888" stroke-dasharray="2,3" stroke-width="1"/>
 <text x="550.0" y="32" fill="#888">現在</text>
 <line x1="55.0" y1="340" x2="55.0" y2="344" stroke="#666"/>
-<text x="55.0" y="356" text-anchor="middle" fill="#333">10/25 19:28</text>
+<text x="55.0" y="356" text-anchor="middle" fill="#333">10/25 21:39</text>
 <line x1="157.5" y1="340" x2="157.5" y2="344" stroke="#666"/>
-<text x="157.5" y="356" text-anchor="middle" fill="#333">10/25 21:58</text>
+<text x="157.5" y="356" text-anchor="middle" fill="#333">10/26 00:09</text>
 <line x1="260.0" y1="340" x2="260.0" y2="344" stroke="#666"/>
-<text x="260.0" y="356" text-anchor="middle" fill="#333">10/26 00:28</text>
+<text x="260.0" y="356" text-anchor="middle" fill="#333">10/26 02:39</text>
 <line x1="362.5" y1="340" x2="362.5" y2="344" stroke="#666"/>
-<text x="362.5" y="356" text-anchor="middle" fill="#333">10/26 02:58</text>
+<text x="362.5" y="356" text-anchor="middle" fill="#333">10/26 05:09</text>
 <line x1="465.0" y1="340" x2="465.0" y2="344" stroke="#666"/>
-<text x="465.0" y="356" text-anchor="middle" fill="#333">10/26 05:28</text>
+<text x="465.0" y="356" text-anchor="middle" fill="#333">10/26 07:39</text>
 <line x1="567.5" y1="340" x2="567.5" y2="344" stroke="#666"/>
-<text x="567.5" y="356" text-anchor="middle" fill="#333">10/26 07:58</text>
+<text x="567.5" y="356" text-anchor="middle" fill="#333">10/26 10:09</text>
 <line x1="670.0" y1="340" x2="670.0" y2="344" stroke="#666"/>
-<text x="670.0" y="356" text-anchor="middle" fill="#333">10/26 10:28</text>
+<text x="670.0" y="356" text-anchor="middle" fill="#333">10/26 12:39</text>
 <line x1="51" y1="340.0" x2="55" y2="340.0" stroke="#666"/>
 <text x="47" y="343.0" text-anchor="end" fill="#333">0.0</text>
 <line x1="51" y1="276.0" x2="55" y2="276.0" stroke="#666"/>
@@ -37,9 +37,9 @@
 <text x="47" y="87.0" text-anchor="end" fill="#333">4.8</text>
 <line x1="51" y1="20.0" x2="55" y2="20.0" stroke="#666"/>
 <text x="47" y="23.0" text-anchor="end" fill="#333">6.1</text>
-<polyline points="384.1,208.3 390.9,207.2 397.7,203.5 404.6,204.1 411.4,201.4 418.2,199.3 425.1,201.4 431.9,201.4 438.7,202.0 445.6,198.2 452.4,199.3 459.2,201.4 466.1,200.4 472.9,201.4 479.7,205.7 486.6,204.6 493.4,208.8 500.2,210.4 507.1,210.4 513.9,208.8 520.7,214.1 527.6,213.1 534.4,216.8 541.2,217.3" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-<circle cx="541.2" cy="217.3" r="3.5" fill="#1a1a1a"/>
-<text x="547.2" y="211.3" fill="#1a1a1a">2.32m</text>
+<polyline points="383.6,201.4 390.4,205.7 397.3,204.6 404.1,208.8 410.9,210.4 417.8,210.4 424.6,208.8 431.4,214.1 438.3,213.1 445.1,216.8 451.9,217.3 458.8,222.6 465.6,219.9 472.4,228.9 479.3,225.8 486.1,231.6 492.9,234.2 499.8,232.1 506.6,238.4 513.4,233.7 520.3,240.0 527.1,240.0 533.9,241.1 540.8,240.0" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+<circle cx="540.8" cy="240.0" r="3.5" fill="#1a1a1a"/>
+<text x="546.8" y="234.0" fill="#1a1a1a">1.89m</text>
 <rect x="63" y="28" width="280" height="82" fill="#ffffff" fill-opacity="0.9" stroke="#ccc"/>
 <text x="69" y="42" fill="#333" font-weight="bold">到達予想</text>
 <text x="69" y="57" fill="#888">水防団待機水位: 見込みなし</text>
